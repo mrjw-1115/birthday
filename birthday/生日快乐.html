@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="10;url=lianbo.html">
+    <title>闵然，生日快乐</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+
+</head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      margin:0;
+    }
+    .container {
+      height: 100vh;
+      background: rgb(216, 215, 207);
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .valentine {
+      position: relative;
+      animation: up 3s linear infinite;
+      cursor: pointer;
+    }
+
+    @keyframes up {
+      0%,100% {
+        transform: translateY(0);
+      }
+      50%{
+        transform: translateY(-50px);
+      }
+    }
+
+    .envelope {
+      width:450px;
+      height:300px;
+      background-color: #791e28;
+      position: relative;
+    }
+
+    .envelope::before {
+      content:"";
+      width:318px;
+      height:318px;
+      background-color: #e5c9a3;
+      position: absolute;
+      transform: rotate(-45deg);
+      transform-origin: 0 0;
+      border-top-right-radius: 30px;
+    }
+
+    .front {
+      width:0;
+      height:0;
+      border-top:143px solid transparent;
+      border-bottom:150px solid transparent;
+      border-right:270px solid rgb(230, 203, 153);
+      position: absolute;
+      top:6px;
+      left:180px;
+    }
+
+    .front::before {
+      content:"";
+      position: absolute;
+      width:0;
+      height: 0;
+      border-top:293px solid transparent;
+      border-left:450px solid #edd8ad;
+      top:-142px;
+      left:-180px;
+    }
+
+    .card {
+      width:410px;
+      height:255px;
+      background-color: #eae2b7;
+      position: absolute;
+      top:6px;
+      left:20px;
+      box-shadow: -5px -5px 100px rgb(0 0 0 / 0.4);
+    }
+
+    .txt {
+      padding:30px;
+      font-size:16px;
+      color:#003049;
+    }
+
+    .content {
+      margin-left:20px;
+      margin-top:20px;
+      font-size: 20px;
+    }
+
+    .shadow {
+      width:495px;
+      height:38px;
+      background: rgb( 0 0 0 / 0.3);
+      position: absolute;
+      bottom:120px;
+      border-radius: 50%;
+      animation: shadow-size 3s linear infinite;
+    }
+
+    @keyframes shadow-size {
+      0%,100%{
+        transform: scaleX(1);
+      }
+      50% {
+        transform: scaleX(0.85);
+      }
+    }
+    .lihua1 {
+      /* 根据图片自己调节位置 */
+      width: 60px;
+      position: absolute;
+      left: 20%;
+      top: 60%;
+      transform: translateX(-50%);
+    }
+    .lihua2 {
+      /* 根据图片自己调节位置 */
+      width: 60px;
+      position: absolute;
+      left: 80%;
+      top: 60%;
+      transform: translateX(-50%);
+    }
+  </style>
+  <script src="j.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="valentine">
+    <div class="envelope"></div>
+    <div class="card">
+      <div class="txt"></div>
+    </div>
+    <div class="front"></div>
+  </div>
+  <div class="shadow"></div>
+</div>
+<img src="lihuatong.png" class="lihua1">
+<script>
+  const lihua1 = document.querySelector(".lihua1")
+  const run1 = () => {
+    confetti({
+      particleCount: 100, //粒子数量
+      spread: 70,         //粒子速度
+      origin: {           //初始位置
+        x: 0.2,
+        y: 0.7,
+      }
+    })
+  }
+  //lihua1.onclick = () => run()
+</script>
+
+<img src="lihuatong.png" class="lihua2">
+<script>
+  const lihua2 = document.querySelector(".lihua2")
+  const run2 = () => {
+    confetti({
+      particleCount: 100, //粒子数量
+      spread: 70,         //粒子速度
+      origin: {           //初始位置
+        x: 0.8,
+        y: 0.7,
+      }
+    })
+  }
+  //lihua2.onclick = () => run2()
+</script>
+
+<script>
+  var time = 30;
+var timer = setInterval(function(){
+ time--;
+ if(time==0){
+   clearInterval(timer);
+ }
+  run1(lihua1);
+ run2(lihua2)
+}, 2000);
+</script>
+</body>
+</html>
+<script>
+  $(".valentine").mouseenter(() => {
+    $(".card").stop().animate({
+      top:"-90px"
+    },"slow")
+    typewriter()
+  })
+  $(".valentine").mouseleave(() => {
+    $(".card").stop().animate({
+      top:0
+    },"slow")
+  })
+
+  function typewriter(){
+    const el = $(".txt")
+    const str = `闵然老师:
+        <div class="content">生日快乐<br>天天开心!</div>
+    `
+
+    let progress = 0
+    const timer = setInterval(() => {
+      const curr = str.substr(progress,1)
+      if(curr === "<"){
+        progress = str.indexOf(">",progress) + 1
+      }else{
+        progress++
+      }
+      el.html(str.substring(0,progress) + (progress & 1 ? "_ " : ""))
+      if(progress > str.length){
+        clearInterval(timer)
+      }
+    },100)
+  }
+</script>
+<img src="lihuatong.png" alt="" class="lihuatong">
+
+</body>
+</html>
+<div>
+  <svg class="loader" viewBox="0 0 48 30" width="48px" height="30px">
+    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1">
+      <g transform="translate(9.5,19)">
+        <circle class="loader_tire" r="9" stroke-dasharray="56.549 56.549"></circle>
+        <g class="loader_spokes-spin" stroke-dasharray="31.416 31.416" stroke-dashoffset="-23.562">
+          <circle class="loader_spokes" r="5"></circle>
+          <circle class="loader_spokes" r="5" transform="rotate(180,0,0)"></circle>
+        </g>
+      </g>
+      <g transform="translate(24,19)">
+        <g class="loader_pedals-spin" stroke-dasharray="25.133 25.133" stroke-dashoffset="-21.991" transform="rotate(67.5,0,0)">
+          <circle class="loader_pedals" r="4"></circle>
+          <circle class="loader_pedals" r="4" transform="rotate(180,0,0)"></circle>
+        </g>
+      </g>
+      <g transform="translate(38.5,19)">
+        <circle class="loader_tire" r="9" stroke-dasharray="56.549 56.549"></circle>
+        <g class="loader_spokes-spin" stroke-dasharray="31.416 31.416" stroke-dashoffset="-23.562">
+          <circle class="loader_spokes" r="5"></circle>
+          <circle class="loader_spokes" r="5" transform="rotate(180,0,0)"></circle>
+        </g>
+      </g>
+      <polyline class="loader_seat" points="14 3,18 3" stroke-dasharray="5 5"></polyline>
+      <polyline class="loader_body" points="16 3,24 19,9.5 19,18 8,34 7,24 19" stroke-dasharray="79 79"></polyline>
+      <path class="loader_handlebars" d="m30,2h6s1,0,1,1-1,1-1,1" stroke-dasharray="10 10"></path>
+      <polyline class="loader_front" points="32.5 2,38.5 19" stroke-dasharray="19 19"></polyline>
+    </g>
+  </svg>
+</div>
